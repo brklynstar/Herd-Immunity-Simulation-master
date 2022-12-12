@@ -7,25 +7,35 @@ class Person(object):
     # Define a person. 
     def __init__(self, _id, is_vaccinated, infection = None):
         # A person has an id, is_vaccinated and possibly an infection
-        self._id = int(_id ) 
-        self.is_vaccinated = int(is_vaccinated)
-        self.infection = int(infection)
+        self._id = _id
+        self.is_vaccinated = is_vaccinated
+        self.infection = infection
        
         # TODO Define the other attributes of a person here
-        self.living = True
+        self.is_alive = True
         self.infected = False
         pass
 
     def did_survive_infection(self):
         # This method checks if a person survived an infection. 
         # TODO Only called if infection attribute is not None.
-        # Check generate a random number between 0.0 - 1.0
-        # If the number is less than the mortality rate of the 
-        # person's infection they have passed away. 
-        # Otherwise they have survived infection and they are now vaccinated. 
+        if self.infection:
+            # Check generate a random number between 0.0 - 1.0
+            rand_person = random.random()
+            # If the number is less than the mortality rate of the 
+        #*** person's infection they have passed away. 
+            if rand_person < self.infection:
+                self.is_alive = False
+                self.infected = False
+                return False                                            
+        # Otherwise they have survived infection and they are now vaccinated.
+            else: self.is_alive = True
+            self.infected = True
+            return True
         # Set their properties to show this
         # TODO: The method Should return a Boolean showing if they survived.
-        pass
+    
+        
 
 if __name__ == "__main__":
     # This section is incomplete finish it and use it to test your Person class
