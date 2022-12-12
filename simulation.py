@@ -7,29 +7,77 @@ from virus import Virus
 
 class Simulation(object):
     def __init__(self, virus, pop_size, vacc_percentage, initial_infected=1):
-        # TODO: Create a Logger object and bind it to self.logger.
+         # TODO: Create a Logger object and bind it to self.logger.
+        logger = Logger
+        self.logger = logger
+        self.virus = virus
+        self.pop_size = pop_size
+        self.vacc_percentage = vacc_percentage
+        self.initial_infected = initial_infected
+        
+       
         # Remember to call the appropriate logger method in the corresponding parts of the simulation.
         
+            
         # TODO: Store the virus in an attribute
+        self.virus = virus
         # TODO: Store pop_size in an attribute
+        self.pop_size = pop_size
         # TODO: Store the vacc_percentage in a variable
+        self.vacc_percentage = vacc_percentage
         # TODO: Store initial_infected in a variable
+        self.initial_infected = initial_infected
+        self.people =self._create_population()
+        self.new_infections =[]
+        self.new_deaths = 0
+        self.num_infected = 0
+        self.total_of_deaths = 0
+        self.is_vaccinated = 0
+        
         # You need to store a list of people (Person instances)
         # Some of these people will be infected some will not. 
         # Use the _create_population() method to create the list and 
         # return it storing it in an attribute here. 
         # TODO: Call self._create_population() and pass in the correct parameters.
-        pass
+        
 
     def _create_population(self):
+                
         # TODO: Create a list of people (Person instances). This list 
         # should have a total number of people equal to the pop_size. 
-        # Some of these people will be uninfected and some will be infected.
+        people = []
+        total_vaxxed = (self.vacc_percentage * self.pop_size)
+        id = 0
+
+        for i in range(total_vaxxed):
+            person = Person(id,True)
+            people.append(person)
+            id += 1
+
+        # Some of these people will be uninfected 
+        for i in range(total_vaxxed):
+            person = Person(id,True)
+            people.append(person)
+            id += 1
+
+        # and some will be infected.
+        for i in range(initial_infected):
+            person = Person(id, False, self.virus)
+            person.infected = True
+            self.total_infected += 1
+            people.append(person)
+            id += 1
+
+        for i in range(self.pop_size - self.initial_infected - total_vaxxed):   
+            person = Person()
+            people.append(person)
+            id += 1
         # The number of infected people should be equal to the the initial_infected
         # TODO: Return the list of people
-        pass
-
+            return people
+            
     def _simulation_should_continue(self):
+       
         # This method will return a booleanb indicating if the simulation 
         # should continue. 
         # The simulation should not continue if all of the people are dead, 
