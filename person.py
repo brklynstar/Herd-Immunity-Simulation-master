@@ -7,8 +7,13 @@ class Person(object):
     # Define a person. 
     def __init__(self, _id, is_vaccinated, infection = None):
         # A person has an id, is_vaccinated and possibly an infection
-        self._id = _id  # int
+        self._id = int(_id ) 
+        self.is_vaccinated = int(is_vaccinated)
+        self.infection = int(infection)
+       
         # TODO Define the other attributes of a person here
+        self.living = True
+        self.infected = False
         pass
 
     def did_survive_infection(self):
