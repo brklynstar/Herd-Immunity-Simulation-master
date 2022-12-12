@@ -75,9 +75,9 @@ class Simulation(object):
         # The number of infected people should be equal to the the initial_infected
         # TODO: Return the list of people
             return people
-            
+
     def _simulation_should_continue(self):
-       
+        population = self.is_vaccinated + self.total_of_deaths
         # This method will return a booleanb indicating if the simulation 
         # should continue. 
         # The simulation should not continue if all of the people are dead, 
